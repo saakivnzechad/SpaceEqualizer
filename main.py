@@ -2,25 +2,17 @@ import pygame
 import random
 import math
 import soundfile as sf
-import yaml
-import os
+import Tools.addition_tools as adt
 
 pygame.init()
 
-path = os.path.abspath('settings.yaml')
-with open(path) as file:
-    settings = yaml.load(file, Loader=yaml.FullLoader)
 
-vec2, vec3 = pygame.math.Vector2, pygame.math.Vector3
-
-RES = settings['WIDTH'], settings['HEIGHT']
-CENTER = vec2(RES[0] // 2, RES[1] // 2)
 
 class Star:
     def __init__(self, app):
         self.screen = app.screen
         self.pos3d = self.get_pos3d()
-        self.vel = random.uniform(0.1, 0.5)
+        self.vel = random.uniform(0.1, 1.0)
         self.color = random.choice(settings['COLORS'])
         self.screen_pos = vec2(0, 0)
         self.size = 10
@@ -34,8 +26,7 @@ class Star:
         return vec3(x, y, settings['DISTANCE'])
 
     def update(self):
-
-        self.pos3d.z -= self.vel * app.amplitude
+        self.pos3d.z -= self.vel * settings['SPEED'] * app.amplitude
         self.pos3d = self.get_pos3d() if self.pos3d.z < 1 else self.pos3d
 
         self.screen_pos = vec2(self.pos3d.x, self.pos3d.y) / self.pos3d.z + CENTER
@@ -72,13 +63,11 @@ class App:
         self.alpha_surface = pygame.Surface(RES)
         self.alpha_surface.set_alpha(settings['TRAIL ALPHA'])
         self.clock = pygame.time.Clock()
-        self.font = pygame.font.SysFont("Arial", 18)
+        self.font = pygame.font.SysFont("Arial", 32)
         self.starfield = Starfield(self)
-        self.deltaTime = 0
-        self.deltaA = 0
-        self.deltaB = 0
         self.fps = 0
         self.fps_text = ""
+        self.wave_text = ""
         self.audiotime = 0
         self.amplitude = 0
         self.sampler = (len(self.data) / self.a.get_length()) / 1000
@@ -93,15 +82,21 @@ class App:
         self.fps_text = self.font.render(self.fps, 1, pygame.Color("white"))
         return self.fps_text
 
+    def wave_render(self):
+        self.wave_text = self.font.render(str(self.amplitude), 1, pygame.Color('red'))
+        return self.wave_text
+
     def run(self):
         while True:
             self.audiotime = round(pygame.mixer.music.get_pos() * self.sampler)
-            self.amplitude = abs(round((self.data[self.audiotime, 0] * 10), 4))
+            self.amplitude = abs(round((self.data[self.audiotime, 0] * settings['AMPLITUDE COEFFICIENT']), 9))
             print(self.audiotime)
             print(self.amplitude)
             # self.screen.fill('black')
             self.screen.blit(self.alpha_surface, (0, 0))
-            self.screen.blit(self.update_fps(), (10, 0))
+            if settings['IS DEBUG MODE']:
+                self.screen.blit(self.update_fps(), (10, 0))
+                self.screen.blit(self.wave_render(), (10, 50))
             self.starfield.run()
 
             pygame.display.flip()
@@ -109,13 +104,18 @@ class App:
                 if i.type == pygame.QUIT:
                     exit()
 
-            self.deltaA = pygame.time.get_ticks()
-            self.deltaTime = (self.deltaA - self.deltaB) / 1000.0
-            self.deltaB = self.deltaA
-
             self.clock.tick(settings['FRAMERATE'])
 
 
 if __name__ == "__main__":
+
+    parse_settings = adt.Parser('settings.yaml')
+    settings = parse_settings.opened
+    based = adt.Based()
+
+    vec2, vec3 = pygame.math.Vector2, pygame.math.Vector3
+    RES = settings['WIDTH'], settings['HEIGHT']
+    CENTER = vec2(RES[0] // 2, RES[1] // 2)
+
     app = App()
     app.run()
