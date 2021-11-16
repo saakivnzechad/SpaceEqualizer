@@ -1,0 +1,150 @@
+#########################
+## settings.yaml  file ##
+#########################
+#                       #
+# Author: SaakivnZechad #
+#                       #
+#########################
+
+# SONG
+SONG NAME: "minimum"     # THE NAME OF WAVE SONG FILE WITHOUT .WAV
+# DISPLAY
+WIDTH: 1920            # WINDOW WIDTH
+HEIGHT: 1080           # WINDOW HEIGHT
+FRAMERATE: 120         # MAX FRAMES PER SECOND
+# STARS
+DISTANCE: 100          # GENERATE DISTANCE
+TRAIL ALPHA: 40        # TRAIN DURATION ( LESS -> LONGEST, MORE -> SHORTLY )
+NUMBER OF STARS: 600  # BASED STARS NUMBER
+# FLAGS
+IS STARS NUMBER DEPEND OF SONG: True # SHOULD THE NUMBER OF STARS ON THE SCREEN CHANGE DEPENDING ON THE WAVE COEFFICIENT
+
+#COLORS
+COLORS:
+  - darkred
+  - brown
+  - firebrick
+  - rosybrown
+  - indianred
+  - lightcoral
+  - snow
+  - red
+  - mistyrose
+  - salmon
+  - tomato
+  - darksalmon
+  - coral
+  - orangered
+  - lightsalmon
+  - sienna
+  - seashell
+  - saddlebrown
+  - chocolate
+  - sandybrown
+  - peachpuff
+  - peru
+  - linen
+  - bisque
+  - darkorange
+  - burlywood
+  - antiquewhite
+  - tan
+  - navajowhite
+  - blanchedalmond
+  - papayawhip
+  - moccasin
+  - orange
+  - wheat
+  - oldlace
+  - floralwhite
+  - darkgoldenrod
+  - goldenrod
+  - cornsilk
+  - lightgoldenrod
+  - gold
+  - lemonchiffon
+  - khaki
+  - palegoldenrod
+  - darkkhaki
+  - beige
+  - lightgoldenrodyellow
+  - ivory
+  - lightyellow
+  - yellow
+  - olivedrab
+  - yellowgreen
+  - darkolivegreen
+  - greenyellow
+  - chartreuse
+  - lawngreen
+  - darkgreen
+  - forestgreen
+  - darkseagreen
+  - limegreen
+  - lightgreen
+  - palegreen
+  - honeydew
+  - green
+  - seagreen
+  - mediumseagreen
+  - springgreen
+  - mintcream
+  - mediumspringgreen
+  - mediumaquamarine
+  - aquamarine
+  - turquoise
+  - lightseagreen
+  - mediumturquoise
+  - darkslategray
+  - darkcyan
+  - paleturquoise
+  - azure
+  - lightcyan
+  - cyan
+  - darkturquoise
+  - cadetblue
+  - powderblue
+  - lightblue
+  - deepskyblue
+  - skyblue
+  - lightskyblue
+  - steelblue
+  - aliceblue
+  - dodgerblue
+  - slategray
+  - lightslategray
+  - lightsteelblue
+  - cornflowerblue
+  - royalblue
+  - midnightblue
+  - navy
+  - darkblue
+  - mediumblue
+  - lavender
+  - ghostwhite
+  - blue
+  - slateblue
+  - lightslateblue
+  - darkslateblue
+  - mediumslateblue
+  - mediumpurple
+  - blueviolet
+  - purple
+  - darkorchid
+  - darkviolet
+  - mediumorchid
+  - darkmagenta
+  - thistle
+  - plum
+  - violet
+  - magenta
+  - orchid
+  - violetred
+  - mediumvioletred
+  - deeppink
+  - hotpink
+  - maroon
+  - lavenderblush
+  - palevioletred
+  - pink
+  - lightpink
