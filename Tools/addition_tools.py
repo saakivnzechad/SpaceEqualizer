@@ -7,12 +7,12 @@ class Based:
         self.deltaA = 0
         self.deltaB = 0
         self._deltaTime = 0
+
     def deltaTime(self, ticks):
         self.deltaA = ticks
         self._deltaTime = (self.deltaA - self.deltaB) / 1000.0
         self.deltaB = self.deltaA
         return self._deltaTime
-
 
 
 class Parser:
@@ -25,8 +25,6 @@ class Parser:
 
     # getting needed variable from parsed .yaml file
     def get_state(self, name):
-        for i in self.opened:  # enum of dictionary
-            if i == name:  # check accordance of dict element with param
-                return self.opened[i]  # returned if successful
+        if name in self.opened:  # check accordance of dict element with param
+            return self.opened[name]  # returned if successful
         return 'nothing found'  # returned if error
-
