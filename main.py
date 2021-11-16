@@ -72,7 +72,7 @@ class App:
         self.amplitude = 0
         self.all_timer_secs = int(round(self.a.get_length(), 0))
         self.all_timer = str(self.all_timer_secs // 60) + " : " + str(self.all_timer_secs - (60 * (self.all_timer_secs // 60)))
-        self.sampling = (len(self.data) / self.a.get_length()) / 1000 + 1
+        self.sampling = round((len(self.data) / self.a.get_length() / 1000), 0)
         self.sampling_text = self.font.render(("sampling is:   " + str(int(self.sampling * 1000))), 1, pygame.Color('white'))
         pygame.mixer.music.play(-1)
 
