@@ -11,7 +11,7 @@ SONG NAME: "i walk this earth all by myself (official lyric video)"          # T
 # DISPLAY
 WIDTH: 1920                  # WINDOW WIDTH
 HEIGHT: 1080                 # WINDOW HEIGHT
-FRAMERATE: 120               # MAX FRAMES PER SECOND
+FRAMERATE: 30               # MAX FRAMES PER SECOND
 # STARS
 DISTANCE: 100                # GENERATE DISTANCE
 TRAIL ALPHA: 40              # TRAIN DURATION ( LESS -> LONGEST, MORE -> SHORTLY )
