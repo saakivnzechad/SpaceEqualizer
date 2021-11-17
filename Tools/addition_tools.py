@@ -10,8 +10,11 @@ class Based:
         self.deltaB = 0
         self._deltaTime = 0
         self.sampling = 0
+        self.audiotime = 0
+        self.amplitude = 0
         self.a = pygame.mixer.Sound('audios/{}.wav'.format(song_path))
         self.data, self.samplerate = sf.read('audios/{}.wav'.format(song_path))
+        self.sampling = round((len(self.data) / self.a.get_length() / 1000), 0)
 
     def deltaTime(self, ticks):
         self.deltaA = ticks
@@ -19,10 +22,10 @@ class Based:
         self.deltaB = self.deltaA
         return self._deltaTime
 
-    def FindSampling(self):
-        self.sampling = round((len(self.data) / self.a.get_length() / 1000), 0)
-        return self.sampling
-
+    def FindAmplitude(self, mus_pos, coefficient):
+        self.audiotime = round(mus_pos * self.sampling)
+        self.amplitude = abs(round((self.data[self.audiotime, 0] * coefficient), 6))
+        return self.audiotime, self.amplitude
 
 class Parser:
     # initialize the class instance

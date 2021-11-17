@@ -24,14 +24,14 @@ class Star:
         return vec3(x, y, settings['DISTANCE'])
 
     def update(self):
-        self.pos3d.z -= self.vel * settings['SPEED'] * app.amplitude
+        self.pos3d.z -= self.vel * settings['SPEED'] * based.FindAmplitude(pygame.mixer.music.get_pos(), settings['AMPLITUDE COEFFICIENT'])[1]
         self.pos3d = self.get_pos3d() if self.pos3d.z < 1 else self.pos3d
 
         self.screen_pos = vec2(self.pos3d.x, self.pos3d.y) / self.pos3d.z + CENTER
         self.size = (settings['DISTANCE'] - self.pos3d.z) / (settings['SIZE'] * self.pos3d.z)
 
         # rotate xy
-        self.pos3d.xy = self.pos3d.xy.rotate(settings['ROTATION'] * app.amplitude)
+        self.pos3d.xy = self.pos3d.xy.rotate(settings['ROTATION'] * based.FindAmplitude(pygame.mixer.music.get_pos(), settings['AMPLITUDE COEFFICIENT'])[1])
 
         # mouse
         mouse_pos = CENTER - vec2(pygame.mouse.get_pos())
@@ -54,35 +54,20 @@ class App:
     def __init__(self):
         pygame.font.init()
         pygame.mixer.music.load('audios/{}.wav'.format(settings['SONG NAME']))
-        self.a = pygame.mixer.Sound('audios/{}.wav'.format(settings['SONG NAME']))
-        self.data, self.samplerate = sf.read('audios/{}.wav'.format(settings['SONG NAME']))
         self.alpha_surface = pygame.Surface(RES)
         self.alpha_surface.set_alpha(settings['TRAIL ALPHA'])
         self.clock = pygame.time.Clock()
         self.starfield = Starfield(self)
-        self.fps = 0
-        self.fps_text = ""
-        self.wave_text = ""
-        self.audiotime = 0
-        self.amplitude = 0
-        self.sampling = round((len(self.data) / self.a.get_length() / 1000), 0)
         pygame.mixer.music.play(-1)
 
 
     def run(self):
         while True:
-            self.audiotime = round(pygame.mixer.music.get_pos() * self.sampling)
-            self.amplitude = abs(round((self.data[self.audiotime, 0] * settings['AMPLITUDE COEFFICIENT']), 9))
-            print(str(self.audiotime) + " : " + str(self.amplitude))
+
             # self.screen.fill('black')
             screen.blit(self.alpha_surface, (0, 0))
 
-            if settings['IS DEBUG MODE']:
-                debug.showFPS(self.clock)
-                debug.showSampling(self.sampling)
-                debug.showTimer(pygame.mixer.music.get_pos())
-                debug.showFrame(self.audiotime, self.data)
-
+            if settings['IS DEBUG MODE']: debug.showFPS(self.clock)
 
             self.starfield.run()
 
@@ -104,7 +89,7 @@ if __name__ == "__main__":
     global_font = pygame.font.SysFont("Arial", 18)
     screen = pygame.display.set_mode(RES)
 
-    based = adt.Based()
+    based = adt.Based(settings['SONG NAME'])
     if settings['IS DEBUG MODE']: debug = adt.DEBUG(pygame.mixer.Sound('audios/{}.wav'.format(settings['SONG NAME'])), global_font, screen)
 
     vec2, vec3 = pygame.math.Vector2, pygame.math.Vector3
