@@ -7,16 +7,16 @@
 #########################
 
 # SONG
-SONG NAME: "i walk this earth all by myself (official lyric video)"          # THE NAME OF WAVE SONG FILE WITHOUT .WAV
+SONG NAME: "blue monday"          # THE NAME OF WAVE SONG FILE WITHOUT .WAV
 # DISPLAY
-WIDTH: 1920                  # WINDOW WIDTH
-HEIGHT: 1080                 # WINDOW HEIGHT
-FRAMERATE: 30               # MAX FRAMES PER SECOND
+WIDTH: 1600                  # WINDOW WIDTH
+HEIGHT: 900                 # WINDOW HEIGHT
+FRAMERATE: 60               # MAX FRAMES PER SECOND
 # STARS
 DISTANCE: 100                # GENERATE DISTANCE
 TRAIL ALPHA: 40              # TRAIN DURATION ( LESS -> LONGEST, MORE -> SHORTLY )
 NUMBER OF STARS: 600         # BASED STARS NUMBER
-SPEED: 0.0001                # BASED SPEED
+SPEED: 0.001                # BASED SPEED
 ROTATION: 0.0001             # STARS ROTATION COEFF
 SIZE: 0.2                    # BASED STARS SIZE
 AMPLITUDE COEFFICIENT: 10000 # MULTIPLIER OF MAIN AMPLITUDE
